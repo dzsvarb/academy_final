@@ -24,7 +24,7 @@
     </tr>
     <tr>
         <td><c:forEach items="${cards}" var="card">
-            <a href="/blockedConfirm?cardNumber=${card.cardNumber}&username=${username}"  />
+            <a href="/blockedConfirm?cardNumber=${card.cardNumber}"  />
             ${card.cardNumber} - ${card.cardPaySystem}
             </a><br>
         </c:forEach>
@@ -45,6 +45,6 @@
 </table>
 
 
-<form action="<c:url value="/main"/>"><input type="submit" value="Back" /></form>
+<button type="button" name="back" onclick="history.back()">Back</button>
 </body>
 </html>

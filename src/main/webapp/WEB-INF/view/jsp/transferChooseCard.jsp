@@ -42,7 +42,7 @@
     </tbody>
 </table>
 
+<button type="button" name="back" onclick="history.back()">Back</button>
 
-<form action="<c:url value="/main"/>"><input type="submit" value="Back" /></form>
 </body>
 </html>

@@ -24,7 +24,7 @@
     </tr>
     <tr>
         <td><c:forEach items="${cards}" var="card">
-            <a href="/activationRequestSend?cardNumber=${card.cardNumber}&username=${username}"  />
+            <a href="/activationRequestSend?cardNumber=${card.cardNumber}"/>
             ${card.cardNumber} - ${card.cardPaySystem}
             </a><br>
         </c:forEach>

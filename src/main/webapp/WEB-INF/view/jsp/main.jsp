@@ -49,23 +49,21 @@
 <p>
 
 <form action="<c:url value="/transferChooseCard"/>">
-    <input type="hidden" name="username" value="${username}">
     <input type="submit" value="Transfer">
 </form>
 
 <form action="<c:url value="/paymentServiceList"/>">
-    <input type="hidden" name="username" value="${username}">
     <input type="submit" value="Payment" />
 </form>
+
         <%--<form action="<c:url value="/lastTransaction"/>"><input type="submit" value="Last Transactions" /></form>--%>
 
 <form action="<c:url value="/blockedChooseCard"/>">
-    <input type="hidden" name="username" value="${username}">
     <input type="submit" value="Block card and account" />
 </form>
+
 <form action="<c:url value="/activationCardList"/>">
     <input name="Account activation request" type="submit" value="Account activation request" />
-    <input type="hidden" name="username" value="${username}">
 </form>
 </p>
 </body>

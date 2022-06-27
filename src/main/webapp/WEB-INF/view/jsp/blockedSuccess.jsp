@@ -9,7 +9,9 @@
 
 <p><h2>Your card blocked!</h2></p>
 <p>Card number <strong>${card.cardNumber}</strong> and account number <strong>${card.cardAccount.accountNumber}</strong> has been blocked</p>
-<form action="<c:url value="/main"/>"><input type="submit" value="Next" /></form>
+<form action="<c:url value="/main"/>">
+    <input type="submit" value="Next" />
+</form>
 
 </body>
 </html>

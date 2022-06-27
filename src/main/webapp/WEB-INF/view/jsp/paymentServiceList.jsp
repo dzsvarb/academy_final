@@ -26,7 +26,7 @@
     <tr>
         <td>
             <c:forEach items="${allServices}" var="service">
-            <a href="/paymentChooseCard?serviceNumber=${service.serviceNumber}&username=${username}"/>${service.serviceNumber} </a><br>
+            <a href="/paymentChooseCard?serviceNumber=${service.serviceNumber}"/>${service.serviceNumber} </a><br>
             </c:forEach>
         </td>
         <td>
@@ -49,6 +49,6 @@
 </table>
 
 
-<form action="<c:url value="/main"/>"><input type="submit" value="Back" /></form>
+<button type="button" name="back" onclick="history.back()">Back</button>
 </body>
 </html>

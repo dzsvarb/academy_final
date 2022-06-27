@@ -27,10 +27,9 @@
             <input type="number" name="amount" size="25" maxlength="6" autofocus required />
         </label><br>
     <p>
-    <input type="hidden" name="senderCardNumber" value="${card.cardNumber}">
+     <input type="hidden" name="senderCardNumber" value="${card.cardNumber}">
      <input type="submit" name="submit" value="Submit" />
     </p>
 </form>
-<form action="<c:url value="/transferChooseCard"/>"><input type="submit" value="Back" /></form>
-</body>
+<button type="button" name="back" onclick="history.back()">Back</button></body>
 </html>

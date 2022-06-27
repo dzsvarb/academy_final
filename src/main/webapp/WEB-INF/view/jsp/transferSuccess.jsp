@@ -8,8 +8,11 @@
 </head>
 
 <p><h2>Success!</h2></p>
+
 <p><strong>${amount}</strong> was transferred from card number <strong>${cardNumber}</strong> to card number <strong>${recipientCard}</strong></p>
+
 <form action="<c:url value="/main"/>"><input type="submit" value="Next" /></form>
+
 
 </body>
 </html>

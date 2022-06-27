@@ -8,7 +8,9 @@
 </head>
 
 <p><h2>Success!</h2></p>
+
 <p>Service <strong>${serviceDescription}</strong> paid successfully</p>
+
 <form action="<c:url value="/main"/>"><input type="submit" value="Next" /></form>
 
 </body>

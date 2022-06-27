@@ -27,11 +27,11 @@ public class MainConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-        auth. authenticationProvider(authenticationProvider());
+        auth.authenticationProvider(authenticationProvider());
     }
 
     @Bean
-    public DaoAuthenticationProvider authenticationProvider (){
+    public DaoAuthenticationProvider authenticationProvider() {
         var authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService);
         authenticationProvider.setPasswordEncoder(bCryptPasswordEncoder);
@@ -45,6 +45,6 @@ public class MainConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET,"/main").hasAnyRole("ADMIN");
+                .antMatchers(HttpMethod.GET, "/main").hasAnyRole("ADMIN");
     }
 }

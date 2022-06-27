@@ -19,12 +19,10 @@ public class MainController {
 
 
     @GetMapping(value = "/main")
-    public String main(HttpSession session, Model model) {
+    public String main( Model model) {
             var user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("username", user.getUsername());
             model.addAttribute("cards", cardService.getCardsByUser(user));
-            /*session.setAttribute("user", user);
-            session.setAttribute("cards", cardService.getCardByUser(user));*/
 
             return "main";
 

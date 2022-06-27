@@ -26,6 +26,10 @@ public class Account {
     @JoinColumn (name = "account_status")
     private Status accountStatus;
 
+    @ManyToOne (cascade = CascadeType.PERSIST)
+    @JoinColumn (name = "account_status_request")
+    private StatusRequest accountStatusRequest;
+
 
 
 

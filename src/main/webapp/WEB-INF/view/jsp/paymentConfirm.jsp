@@ -16,6 +16,7 @@
     <input type="hidden" name="senderCardNumber" value="${cardNumber}">
     <input type="hidden" name="serviceNumber" value="${service.serviceNumber}">
 </form>
-<form action="<c:url value="/paymentChooseCard"/>"><input type="submit" value="Back" /></form>
+
+<button type="button" name="back" onclick="history.back()">Back</button>
 </body>
 </html>

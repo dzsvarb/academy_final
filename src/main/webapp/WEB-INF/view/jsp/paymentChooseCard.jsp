@@ -44,6 +44,6 @@
 </table>
 
 
-<form action="<c:url value="/paymentServiceList"/>"><input type="submit" value="Back" /></form>
+<button type="button" name="back" onclick="history.back()">Back</button>
 </body>
 </html>

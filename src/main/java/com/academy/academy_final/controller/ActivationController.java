@@ -1,7 +1,10 @@
 package com.academy.academy_final.controller;
 
+import com.academy.academy_final.model.entity.User;
+import com.academy.academy_final.service.AccountService;
 import com.academy.academy_final.service.CardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +18,12 @@ import static com.academy.academy_final.controller.BlockedController.ACTIVE;
 public class ActivationController {
 
     private final CardService cardService;
+    private final AccountService accountService;
 
     @GetMapping(value = "/activationCardList")
-    String cardList( Model model, @RequestParam String username) {
-        showAllUserCards(model, username);
+    String cardList( Model model) {
+        var user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        showAllUserCards(model, user.getUsername());
 
         return "activationCardList";
     }
@@ -29,13 +34,17 @@ public class ActivationController {
     }
 
     @GetMapping(value = "/activationRequestSend")
-    String activationRequestSend( Model model, @RequestParam String username, @RequestParam Integer cardNumber) {
+    String activationRequestSend( Model model, @RequestParam Integer cardNumber) {
+        var user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         var card = cardService.getCardByCardNumber(cardNumber);
         if(card.getCardAccount().getAccountStatus().getStatusId().equals(ACTIVE)) {
-            showAllUserCards(model, username);
+            showAllUserCards(model, user.getUsername());
             return "activationCardList";
         }
-        //send.request
+        accountService.setStatusRequestAccount(cardNumber);
+
+        showAllUserCards(model, user.getUsername());
+
         return "activationRequestSend";
     }
 

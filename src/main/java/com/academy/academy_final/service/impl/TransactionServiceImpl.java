@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.CannotCreateTransactionException;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +19,18 @@ public class TransactionServiceImpl implements TransactionService {
 
     private final TransactionRepository transactionRepository;
     private final AccountRepository accountRepository;
+
+    @Override
+    public void transaction(String transactionType, Account senderAccountNumber, Account recipientAccountNumber, Float amount, LocalDateTime localTime) {
+        Transaction transaction = new Transaction();
+        transaction.setTransactionType(transactionType);
+        transaction.setSenderAccount(senderAccountNumber);
+        transaction.setRecipientAccount(recipientAccountNumber);
+        transaction.setTransactionValue(amount);
+        transaction.setTransactionTime(localTime);
+
+        save(transaction);
+    }
 
     @Override
     @Transactional
@@ -36,7 +50,7 @@ public class TransactionServiceImpl implements TransactionService {
 
             transactionRepository.saveAndFlush(transaction);}
         else {
-            throw new CannotCreateTransactionException("One of account BLOCKED!");
+            throw new CannotCreateTransactionException("One of account BLOCKED!");//todo можно через трай кетч передать в модель и отображать на странице (новую выводить)
         }
 
 
