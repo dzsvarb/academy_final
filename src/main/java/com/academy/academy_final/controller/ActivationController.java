@@ -25,27 +25,22 @@ public class ActivationController {
     @GetMapping(value = "/activationCardList")
     String cardList( Model model) {
         var user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        showAllUserCards(model, user.getUsername());
-
+        model.addAttribute("cards", cardService.getCardsByUsername(user.getUsername()));
         return "activationCardList";
     }
 
-    private void showAllUserCards(Model model, String username) {
-        model.addAttribute("username", username);
-        model.addAttribute("cards", cardService.getCardsByUsername(username));
-    }
 
     @GetMapping(value = "/activationRequestSend")
     String activationRequestSend( Model model, @RequestParam Integer cardNumber) {
         var user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         var card = cardService.getCardByCardNumber(cardNumber);
         if(card.getCardAccount().getAccountStatus().getStatusId().equals(ACTIVE)) {
-            showAllUserCards(model, user.getUsername());
+            model.addAttribute("cards", cardService.getCardsByUsername(user.getUsername()));
             return "activationCardList";
         }
         accountService.setStatusRequestAccountTrue(cardNumber);
 
-        showAllUserCards(model, user.getUsername());
+        model.addAttribute("cardNumber",cardNumber);
 
         return "activationRequestSend";
     }

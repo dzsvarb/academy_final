@@ -31,35 +31,42 @@
     <div class="bg-light border">Information</div>
 </div>
 
-<table style="width:1000px">
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Your cards number</th>
+        <th scope="col">Card payment system</th>
+        <th scope="col">Your accounts number</th>
+        <th scope="col">Status account</th>
+        <th scope="col">Request for activate account</th>
+        <th scope="col">Balance</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
     <tbody>
-    <tr>
-        <td>Your cards number</td>
-        <td>Your accounts number</td>
-        <td>Status account</td>
-        <td>Balance</td>
-    </tr>
-    <tr>
-        <td><c:forEach items="${cards}" var="card">
-            ${card.cardNumber} - ${card.cardPaySystem}<br>
-        </c:forEach>
-        </td>
-        <td><c:forEach items="${cards}" var="card">
-            ${card.cardAccount.accountNumber}<br>
-        </c:forEach></td>
-        <td><c:forEach items="${cards}" var="card">
-            ${card.cardAccount.accountStatus.statusName}<br>
-        </c:forEach>
-        </td>
-        <td><c:forEach items="${cards}" var="card">
-            ${card.cardAccount.accountBalance}<br>
-        </c:forEach> </td>
-    </tr>
+    <c:forEach items="${cards}" var="card">
+        <tr>
+            <td> ${card.cardNumber}</td>
+            <td> ${card.cardPaySystem}</td>
+            <td> ${card.cardAccount.accountNumber}</td>
+            <td> ${card.cardAccount.accountStatus.statusName}</td>
+            <td>
+                <c:if test="${card.cardAccount.accountStatusRequest.statusRequestName == 'FALSE'}"> </c:if>
+                <c:if test="${card.cardAccount.accountStatusRequest.statusRequestName == 'TRUE'}">
+                    Request has been sent. Wait.
+                </c:if></td>
+            <td> ${card.cardAccount.accountBalance}</td>
+            <td><form action="<c:url value="/main/blockedChooseCard"/>">
+                <button type="submit" class="btn btn-outline-danger">Blocked</button>
+            </form></td>
+        </tr>
+    </c:forEach>
     </tbody>
 </table>
 
+
 <div class="vstack gap-3">
-    <div class="bg-light border">   Actions</div>
+    <div class="bg-light border">Actions</div>
 </div>
 
 <div class="btn-group" role="group" aria-label="Basic example">
@@ -67,32 +74,10 @@
         <div class="hstack gap-3">
         <button type="submit" class="btn btn-primary"  formaction="<c:url value="/main/transferChooseCard"/>">Transfer</button>
         <button type="submit" class="btn btn-primary"  formaction="<c:url value="/main/paymentServiceList"/>">Payment</button>
-        <button type="submit" class="btn btn-primary"  formaction="<c:url value="/main/blockedChooseCard"/>">Block card and account</button>
         <button type="submit" class="btn btn-primary"  formaction="<c:url value="/main/activationCardList"/>">Account activation request</button>
         </div>
     </form>
 </div>
-<%--
-<p>
 
-<form action="<c:url value="/main/transferChooseCard"/>">
-    <input type="submit" value="Transfer">
-</form>
-
-<form action="<c:url value="/main/paymentServiceList"/>">
-    <input type="submit" value="Payment" />
-</form>
-
-        &lt;%&ndash;<form action="<c:url value="/lastTransaction"/>"><input type="submit" value="Last Transactions" /></form>&ndash;%&gt;
-
-<form action="<c:url value="/main/blockedChooseCard"/>">
-    <input type="submit" value="Block card and account" />
-</form>
-
-<form action="<c:url value="/main/activationCardList"/>">
-    <input name="Account activation request" type="submit" value="Account activation request" />
-</form>
-</p>
---%>
 </body>
 </html>

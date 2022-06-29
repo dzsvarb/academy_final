@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-public class Status {
+public final class Status {
     @Id
     @Column (name = "status_id")
     private Integer statusId;

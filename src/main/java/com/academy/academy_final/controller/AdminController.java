@@ -45,7 +45,7 @@ public class AdminController {
 
         }
         model.addAttribute("card", cardService.getCardByCardNumber(cardNumber));
-            return "admin";
+            return "admin";//todo -- no redirect correct
     }
 
     @GetMapping(value = "/edit/change")

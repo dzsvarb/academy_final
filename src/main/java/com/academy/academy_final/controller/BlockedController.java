@@ -24,22 +24,18 @@ public class BlockedController {
     @GetMapping(value = "/blockedChooseCard")
     String blockedChooseCard( Model model){
         var user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        showAllUserCards(user.getUsername(), model);
+        model.addAttribute("cards", cardService.getCardsByUsername(user.getUsername()));
 
         return "blockedChooseCard";
     }
 
-    private void showAllUserCards(String username, Model model) {
-        model.addAttribute("cards", cardService.getCardsByUsername(username));
-        model.addAttribute("username", username);
-    }
 
     @GetMapping(value = "/blockedConfirm")
         String blockedConfirm(@RequestParam Integer cardNumber, Model model){
         var user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         var card = cardService.getCardByCardNumber(cardNumber);
         if(card.getCardAccount().getAccountStatus().getStatusId().equals(BLOCKED)) {
-            showAllUserCards(user.getUsername(), model);
+            model.addAttribute("cards", cardService.getCardsByUsername(user.getUsername()));
             return "blockedChooseCard";
         }
         model.addAttribute("card",cardService.getCardByCardNumber(cardNumber));
@@ -51,7 +47,6 @@ public class BlockedController {
         model.addAttribute("card", card);
         if(card.getCardAccount().getAccountStatus().getStatusId().equals(ACTIVE)){
             accountService.changeAccountStatusToBlocked(card.getCardAccount());
-            model.addAttribute("card", card);
             return "blockedSuccess";
         }
         return "blockedChooseCard";
