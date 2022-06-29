@@ -21,14 +21,6 @@ public class BlockedController {
     private final CardService cardService;
     private final AccountService accountService;
 
-    @GetMapping(value = "/blockedChooseCard")
-    String blockedChooseCard( Model model){
-        var user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("cards", cardService.getCardsByUsername(user.getUsername()));
-
-        return "blockedChooseCard";
-    }
-
 
     @GetMapping(value = "/blockedConfirm")
         String blockedConfirm(@RequestParam Integer cardNumber, Model model){

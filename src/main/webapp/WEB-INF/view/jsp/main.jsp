@@ -62,8 +62,9 @@
                             </td>
                             <td> ${card.cardAccount.accountBalance}</td>
                             <td>
-                                <form action="<c:url value="/main/blockedChooseCard"/>">
+                                <form action="<c:url value="/main/blockedConfirm"/>">
                                     <button type="submit" class="btn btn-outline-danger">Block</button>
+                                    <input type="hidden" name="cardNumber" value="${card.cardNumber}">
                                 </form>
                             </td>
                         </tr>
