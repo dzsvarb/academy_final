@@ -36,7 +36,7 @@ public class AdminController {
         return "edit";
     }
 
-    @GetMapping(value = "/edit/activate")
+    @GetMapping(value = "/activate")
     public String adminActivate(Model model, @RequestParam Integer cardNumber) {
         var card = cardService.getCardByCardNumber(cardNumber);
         if(card.getCardAccount().getAccountStatus().getStatusId().equals(BLOCKED)
@@ -45,7 +45,7 @@ public class AdminController {
 
         }
         model.addAttribute("card", cardService.getCardByCardNumber(cardNumber));
-            return "admin";//todo -- no redirect correct
+            return "edit";
     }
 
     @GetMapping(value = "/edit/change")
