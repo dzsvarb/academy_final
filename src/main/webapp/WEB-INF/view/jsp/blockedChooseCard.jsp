@@ -4,6 +4,7 @@
 <html>
 <head>
     <title>Choose a card</title>
+
 </head>
 <body>
 <div>
@@ -24,7 +25,7 @@
     </tr>
     <tr>
         <td><c:forEach items="${cards}" var="card">
-            <a href="/blockedConfirm?cardNumber=${card.cardNumber}"  />
+            <a href="/main/blockedConfirm?cardNumber=${card.cardNumber}"  />
             ${card.cardNumber} - ${card.cardPaySystem}
             </a><br>
         </c:forEach>

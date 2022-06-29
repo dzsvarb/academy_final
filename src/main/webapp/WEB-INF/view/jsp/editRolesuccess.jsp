@@ -10,9 +10,9 @@
 
 <p><h2>Success!</h2></p>
 
-<p><strong>${amount}</strong> was transferred from card number <strong>${cardNumber}</strong> to card number <strong>${recipientCard}</strong></p>
+<p><strong>${user.username}</strong> is assigned a new role <strong>${user.roles}</strong> </p>
 
-<form action="<c:url value="/main"/>"><input type="submit" value="Next" /></form>
+<form action="<c:url value="/edit"/>"><input type="submit" value="Next" /></form>
 
 
 </body>

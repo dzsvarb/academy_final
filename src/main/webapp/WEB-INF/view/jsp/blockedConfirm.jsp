@@ -5,12 +5,13 @@
 <body>
 <head>
     <title>Block Card</title>
+
 </head>
 
 <p><h2>Confirm blocking!</h2></p>
 <p>The card number <strong>${card.cardNumber}</strong> and account number <strong>${card.cardAccount.accountNumber}</strong>
     will be blocked. <br>Attention! To unlock, you will need to leave a request to the administrator.</p>
-    <form action="<c:url value="/blockedSuccess"/>">
+    <form action="<c:url value="/main/blockedSuccess"/>">
         <input type="submit" value="Blocked" />
         <input type="hidden" name="cardNumber" value="${card.cardNumber}">
     </form>

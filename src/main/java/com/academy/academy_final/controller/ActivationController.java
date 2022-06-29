@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import static com.academy.academy_final.controller.BlockedController.ACTIVE;
@@ -15,6 +16,7 @@ import static com.academy.academy_final.controller.BlockedController.ACTIVE;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping(value = "/main")
 public class ActivationController {
 
     private final CardService cardService;
@@ -41,7 +43,7 @@ public class ActivationController {
             showAllUserCards(model, user.getUsername());
             return "activationCardList";
         }
-        accountService.setStatusRequestAccount(cardNumber);
+        accountService.setStatusRequestAccountTrue(cardNumber);
 
         showAllUserCards(model, user.getUsername());
 

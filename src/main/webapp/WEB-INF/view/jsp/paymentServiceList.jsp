@@ -4,6 +4,7 @@
 <html>
 <head>
     <title>Choose a Service</title>
+
 </head>
 <body>
 <div>
@@ -26,7 +27,7 @@
     <tr>
         <td>
             <c:forEach items="${allServices}" var="service">
-            <a href="/paymentChooseCard?serviceNumber=${service.serviceNumber}"/>${service.serviceNumber} </a><br>
+            <a href="/main/paymentChooseCard?serviceNumber=${service.serviceNumber}"/>${service.serviceNumber} </a><br>
             </c:forEach>
         </td>
         <td>

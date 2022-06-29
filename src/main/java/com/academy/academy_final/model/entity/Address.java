@@ -21,7 +21,5 @@ public class Address {
     @Column
     private String room;
 
-   /* @OneToMany (mappedBy = "userAddress")
-    private List<User> users;*/
 }
 

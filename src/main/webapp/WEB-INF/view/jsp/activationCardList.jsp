@@ -4,6 +4,7 @@
 <html>
 <head>
     <title>Choose a card</title>
+
 </head>
 <body>
 <div>
@@ -14,7 +15,7 @@
 <p>Activation request</p>
 <hr />
 
-<table style="width:1000px">
+<table>
     <tbody>
     <tr>
         <td>Your cards number</td>
@@ -24,7 +25,7 @@
     </tr>
     <tr>
         <td><c:forEach items="${cards}" var="card">
-            <a href="/activationRequestSend?cardNumber=${card.cardNumber}"/>
+            <a href="/main/activationRequestSend?cardNumber=${card.cardNumber}"/>
             ${card.cardNumber} - ${card.cardPaySystem}
             </a><br>
         </c:forEach>

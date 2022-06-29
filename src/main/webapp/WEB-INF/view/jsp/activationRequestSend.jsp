@@ -5,6 +5,7 @@
 <body>
 <head>
     <title>Activation</title>
+
 </head>
 
 <p><h2>Application sent!</h2></p>

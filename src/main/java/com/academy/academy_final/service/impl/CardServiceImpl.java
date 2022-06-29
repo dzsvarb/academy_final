@@ -19,10 +19,7 @@ public class CardServiceImpl implements CardService {
     private final CardRepository cardRepository;
     private final UserRepository userRepository;
 
-    @Override
-    public Card getCardByUser(User user) {
-        return cardRepository.getCardByUser(user);
-    }
+
     @Override
     public List<Card> getCardsByUser(User user) {
 
@@ -39,10 +36,10 @@ public class CardServiceImpl implements CardService {
         return cardRepository.getCardByCardNumber(cardNumber);
     }
 
-
-
     @Override
-    public Card getCardByUsername(String username) {
-        return  cardRepository.getCardByUser(userRepository.getUserByUsername(username));
+    public List<Card> getAllCard() {
+        return cardRepository.findAll();
     }
+
+
 }

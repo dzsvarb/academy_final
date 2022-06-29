@@ -5,6 +5,7 @@
 <body>
 <head>
     <title>Blocked</title>
+
 </head>
 
 <p><h2>Your card blocked!</h2></p>

@@ -8,7 +8,6 @@ import javax.persistence.*;
 @Entity
 public final class Status {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "status_id")
     private Integer statusId;
     @Column

@@ -24,7 +24,7 @@
     </tr>
     <tr>
         <td><c:forEach items="${cards}" var="card">
-            <a href="/paymentConfirm?cardNumber=${card.cardNumber}&serviceNumber=${serviceNumber}"  />
+            <a href="/main/paymentConfirm?cardNumber=${card.cardNumber}&serviceNumber=${serviceNumber}"  />
             ${card.cardNumber} - ${card.cardPaySystem}</a><br>
         </c:forEach>
 

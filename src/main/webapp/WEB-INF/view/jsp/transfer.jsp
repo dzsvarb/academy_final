@@ -14,9 +14,10 @@
 
 <hr />
 <p>Transfer</p>
+
 <hr />
 
-<form action="<c:url value="/transferSuccess"/>">
+<form action="<c:url value="/main/transferSuccess"/>">
     <p>Enter recipient card <br>
         <label>
             <input type="number" name="recipientCardNumber" size="25" maxlength="15"  autofocus required/>
@@ -31,5 +32,6 @@
      <input type="submit" name="submit" value="Submit" />
     </p>
 </form>
-<button type="button" name="back" onclick="history.back()">Back</button></body>
+<button type="button" name="back" onclick="history.back()">Back</button>
+</body>
 </html>

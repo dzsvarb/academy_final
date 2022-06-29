@@ -11,8 +11,8 @@ public interface CardService {
     List<Card> getCardsByUsername (String username);
     Card getCardByCardNumber (Integer cardNumber);
 
-    Card getCardByUser (User user);
+    List<Card> getAllCard ();
 
-    Card getCardByUsername (String username);
+
 
 }

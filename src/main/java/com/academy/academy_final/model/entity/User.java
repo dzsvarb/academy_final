@@ -40,6 +40,10 @@ public class User implements UserDetails {
     @JoinColumn (name = "user_address")
     private Address userAddress;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn (name = "user_roles")
+    private UserRoles userRoles;
+
     @OneToMany(mappedBy = "user")
     private List<Card> cards;
 

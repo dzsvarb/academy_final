@@ -8,7 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import javax.servlet.http.HttpSession;
+
 
 @Controller
 @RequiredArgsConstructor
@@ -19,13 +19,12 @@ public class MainController {
 
 
     @GetMapping(value = "/main")
-    public String main( Model model) {
+    public String main(Model model) {
             var user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("username", user.getUsername());
             model.addAttribute("cards", cardService.getCardsByUser(user));
 
             return "main";
-
-
     }
+
 }

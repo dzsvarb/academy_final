@@ -11,6 +11,8 @@ public interface AccountService {
 
     void changeAccountStatusToActive (Account account);
 
-    void setStatusRequestAccount(Integer cardNumber);
+    void setStatusRequestAccountTrue(Integer cardNumber);
+
+
 
 }
