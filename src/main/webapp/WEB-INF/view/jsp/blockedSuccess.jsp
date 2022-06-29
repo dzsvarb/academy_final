@@ -29,8 +29,7 @@
 </nav>
 <div class="vstack gap-1">
     <div class="bg-light border">Information</div>
-    <div class="bg-light border">Your card blocked!</div>
-    <div class="bg-light border">${principal.username} ,card number <strong>${card.cardNumber}</strong> and account number <strong>${card.cardAccount.accountNumber}</strong>
+    <div class="bg-success p-2" style="--bs-bg-opacity: .5;">Your card blocked!<br> ${principal.username} ,card number <strong>${card.cardNumber}</strong> and account number <strong>${card.cardAccount.accountNumber}</strong>
         has been blocked.
     </div>
 </div>

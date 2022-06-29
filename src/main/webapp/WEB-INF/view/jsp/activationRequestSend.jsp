@@ -29,8 +29,7 @@
 </nav>
 <div class="vstack gap-1">
     <div class="bg-light border">Information</div>
-    <div class="bg-light border">Application sent!</div>
-    <div class="bg-light border">${principal.username} ,You have successfully sent a request to activate the card ${cardNumber}
+    <div class="bg-success p-2" style="--bs-bg-opacity: .5;">Application sent!<br>${principal.username} ,You have successfully sent a request to activate the card ${cardNumber}
         (account ${card.cardAccount.accountNumber}).<br>
         After reviewing the application by the administrator, your account will be unblocked.<br>Please wait.
     </div>

@@ -26,7 +26,6 @@ public class PaymentController {
     @GetMapping(value = "/paymentServiceList")
     String servicesList( Model model) {
         var user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("username", user.getUsername());
         model.addAttribute("allServices", serviceService.getAllService());
 
         return "paymentServiceList";
@@ -34,9 +33,8 @@ public class PaymentController {
 
     @GetMapping(value = "/paymentChooseCard")
     String paymentChooseCard(Model model, @RequestParam Integer serviceNumber) {
-        var user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        var user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();//todo verified balance +
         model.addAttribute("cards", cardService.getCardsByUser(user));
-        model.addAttribute("username", user.getUsername());
         model.addAttribute("serviceNumber", serviceNumber);
 
         return "paymentChooseCard";

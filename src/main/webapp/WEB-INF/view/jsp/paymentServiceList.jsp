@@ -1,55 +1,64 @@
 <%@ page contentType="text/html;charset=UTF-8" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Choose a Service</title>
-
+    <title>Personal bank manager</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div>
-    <h2 style="text-align:center">${username}, Choose a Service for Payment </h2>
+<nav class="navbar" style="background-color: #e3f2fd;">
+    <div class="container-fluid">
+        <a class="navbar-brand">Personal Bank Manager</a>
+        <span class="navbar-text">
+    <sec:authentication var="principal" property="principal" />
+    <c:if test="${principal.roles == '[ROLE_ADMIN]'}">
+        Administrator
+    </c:if>
+    <c:if test="${principal.roles == '[ROLE_CUSTOMER]'}">
+        User
+    </c:if>
+                 |  ${principal.username}
+        </span>
+        <form class="d-flex" action="<c:url value="/logout"/>">
+            <button class="btn btn-outline-success" type="submit">Log out</button>
+        </form>
+    </div>
+</nav>
+<div class="vstack gap-1">
+    <div class="bg-light border">Services</div>
+    <div class="bg-light border">${principal.username} , choose a Service for payment</div>
 </div>
 
-<hr />
-<p>Services</p>
-<hr />
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Service number</th>
+        <th scope="col">Service description</th>
+        <th scope="col">Service Price</th>
+        <th scope="col">Organisation</th>
 
-<table style="width:1000px">
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
     <tbody>
-    <tr>
-        <td>Service number</td>
-        <td>Service description</td>
-        <td>Service Price</td>
-        <td>Organisation</td>
-
-    </tr>
-    <tr>
-        <td>
-            <c:forEach items="${allServices}" var="service">
-            <a href="/main/paymentChooseCard?serviceNumber=${service.serviceNumber}"/>${service.serviceNumber} </a><br>
-            </c:forEach>
-        </td>
-        <td>
-            <c:forEach items="${allServices}" var="service">
-            ${service.serviceDescription}<br>
-            </c:forEach></td>
-        <td>
-            <c:forEach items="${allServices}" var="service">
-            ${service.servicePrice}<br>
-            </c:forEach>
-        </td>
-        <td>
-            <c:forEach items="${allServices}" var="service">
-            ${service.organisation.organisationName}<br>
-            </c:forEach></td>
-        </td>
-
-    </tr>
+    <c:forEach items="${allServices}" var="service">
+        <tr>
+            <td> ${service.serviceNumber}</td>
+            <td> ${service.serviceDescription}</td>
+            <td> ${service.servicePrice}</td>
+            <td> ${service.organisation.organisationName}</td>
+            <td><form action="<c:url value="/main/paymentChooseCard"/>">
+                <button type="submit" class="btn btn-outline-danger">Select</button>
+                <input type="hidden" name="serviceNumber" value="${service.serviceNumber}">
+            </form></td>
+        </tr>
+    </c:forEach>
     </tbody>
 </table>
 
-
-<button type="button" name="back" onclick="history.back()">Back</button>
+<button type="button" class="btn btn-primary"  name="back" onclick="history.back()">Back</button>
 </body>
 </html>

@@ -28,7 +28,6 @@ public class TransferController {
     public String transferChooseCard(Model model) {
         var user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("cards", cardService.getCardsByUser(user));
-        model.addAttribute("username",user.getUsername());
         return "transferChooseCard";
     }
 
@@ -42,9 +41,9 @@ public class TransferController {
 
     @GetMapping(value = "/transferSuccess")
     public String transferSuccess(@RequestParam Integer amount, @RequestParam Integer recipientCardNumber,@RequestParam Integer senderCardNumber, Model model) {
-        if(senderCardNumber.equals(recipientCardNumber)||amount<=0|| recipientCardNumber == null){ //TODO вынести обязательно!!
+        if(senderCardNumber.equals(recipientCardNumber)||amount<0|| recipientCardNumber == null){
             var card = cardService.getCardByCardNumber(senderCardNumber);
-            model.addAttribute("card", card);                        //всю валидацию!!
+            model.addAttribute("card", card);
             return "transfer";
         }
 
