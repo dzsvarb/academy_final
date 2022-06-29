@@ -45,8 +45,6 @@ public class MainConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .formLogin().permitAll()
-                .defaultSuccessUrl("/main")
-                .defaultSuccessUrl("/admin")
                 .and()
                 .csrf().disable()
                 .authorizeRequests()

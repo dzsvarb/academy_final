@@ -18,7 +18,6 @@ import static com.academy.academy_final.controller.BlockedController.BLOCKED;
 public class AdminController {
     private final CardService cardService;
     private final AccountService accountService;
-    private final UserService userService;
 
 
 
@@ -51,8 +50,8 @@ public class AdminController {
 
     @GetMapping(value = "/edit/change")
     public String adminEditChange(Model model, @RequestParam Integer cardNumber) {
-        var user = cardService.getCardByCardNumber(cardNumber).getUser();
-        userService.changeRole(user);
+
+
 
 
         return "editRolesuccess";

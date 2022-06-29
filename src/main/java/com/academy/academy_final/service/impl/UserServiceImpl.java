@@ -1,7 +1,6 @@
 package com.academy.academy_final.service.impl;
 
 import com.academy.academy_final.model.entity.User;
-import com.academy.academy_final.model.entity.UserRoles;
 import com.academy.academy_final.model.repository.UserRepository;
 import com.academy.academy_final.service.CardService;
 import com.academy.academy_final.service.UserService;
@@ -39,16 +38,7 @@ public class UserServiceImpl implements UserService {
         return user.getId() ;
     }
 
-    @Override
-    public void changeRole(User user) {
-        if (user.getUserRoles().getRole().equals("ROLE_CUSTOMER")){
-            UserRoles userRolesA = new UserRoles();
-            userRolesA.setRole("ROLE_ADMIN");
-            user.setUserRoles(userRolesA);
 
-        userRepository.saveAndFlush(user);
-        }
-    }
 
 
 }

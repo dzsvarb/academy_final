@@ -14,6 +14,5 @@ public interface UserService {
 
     Integer getUserIdByCard (Integer cardNumber);
 
-    void changeRole(User user);
 
 }

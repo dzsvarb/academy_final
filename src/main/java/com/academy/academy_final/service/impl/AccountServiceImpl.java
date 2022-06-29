@@ -19,8 +19,8 @@ import static com.academy.academy_final.controller.BlockedController.BLOCKED;
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
 
-    public static final int STATUS_REQUEST_FALSE = 1;
     public static final int STATUS_REQUEST_TRUE = 2;
+    public static final int STATUS_REQUEST_FALSE = 1;
     private final AccountRepository accountRepository;
     private final CardService cardService;
     
@@ -31,8 +31,18 @@ public class AccountServiceImpl implements AccountService {
     public void changeAccountStatusToBlocked(Account account) {
 
         if (account.getAccountStatus().getStatusId().equals(ACTIVE)){
-            account.setAccountStatus(BLOCKED);
-            accountRepository.saveAndFlush(account);
+            Status status = new Status();
+            status.setStatusId(BLOCKED);
+            Account bAccount = new Account();
+
+            bAccount.setAccountStatus(status);
+            bAccount.setAccountBalance(account.getAccountBalance());
+            bAccount.setAccountNumber(account.getAccountNumber());
+            bAccount.setSenderTransactions(account.getSenderTransactions());
+            bAccount.setRecipientTransactions(account.getRecipientTransactions());
+            bAccount.setAccountStatusRequest(account.getAccountStatusRequest());
+
+            accountRepository.saveAndFlush(bAccount);
         }
 
     }
@@ -41,9 +51,21 @@ public class AccountServiceImpl implements AccountService {
     @Transactional
     public void changeAccountStatusToActive(Account account) {
         if (account.getAccountStatus().getStatusId().equals(BLOCKED)){
-            account.setAccountStatus(ACTIVE);
-            account.setAccountStatusRequest(STATUS_REQUEST_FALSE);
-            accountRepository.saveAndFlush(account);
+            Status status = new Status();
+            status.setStatusId(ACTIVE);
+
+            StatusRequest statusRequestFalse = new StatusRequest();
+            statusRequestFalse.setStatusRequestId(STATUS_REQUEST_FALSE);
+
+            Account bAccount = new Account();
+            bAccount.setAccountStatus(status);
+            bAccount.setAccountBalance(account.getAccountBalance());
+            bAccount.setAccountNumber(account.getAccountNumber());
+            bAccount.setSenderTransactions(account.getSenderTransactions());
+            bAccount.setRecipientTransactions(account.getRecipientTransactions());
+            bAccount.setAccountStatusRequest(statusRequestFalse);
+
+            accountRepository.saveAndFlush(bAccount);
         }
     }
 
@@ -52,9 +74,20 @@ public class AccountServiceImpl implements AccountService {
     public void setStatusRequestAccountTrue(Integer cardNumber) {
         var card = cardService.getCardByCardNumber(cardNumber);
         var account = card.getCardAccount();
-        account.setAccountStatusRequest(STATUS_REQUEST_TRUE);
 
-            accountRepository.saveAndFlush(account);
+            Account bAccount = new Account();
+
+            StatusRequest statusRequestTrue = new StatusRequest();
+            statusRequestTrue.setStatusRequestId(STATUS_REQUEST_TRUE);
+
+            bAccount.setAccountStatusRequest(statusRequestTrue);
+            bAccount.setAccountNumber(account.getAccountNumber());
+            bAccount.setAccountStatus(account.getAccountStatus());
+            bAccount.setAccountBalance(account.getAccountBalance());
+            bAccount.setSenderTransactions(account.getSenderTransactions());
+            bAccount.setRecipientTransactions(account.getRecipientTransactions());
+
+            accountRepository.saveAndFlush(bAccount);
 
     }
 

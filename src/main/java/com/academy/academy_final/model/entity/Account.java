@@ -31,11 +31,6 @@ public class Account {
     private StatusRequest accountStatusRequest;
 
 
-    public void setAccountStatus(int i) {
-        accountStatus.setStatusId(i);
-    }
 
-    public void setAccountStatusRequest(int statusRequestFalse) {
-        accountStatusRequest.setStatusRequestId(statusRequestFalse);
-    }
+
 }

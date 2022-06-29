@@ -65,7 +65,7 @@
 <div class="btn-group" role="group" aria-label="Basic example">
     <form>
         <button type="submit" class="btn btn-primary" name="cardNumber" value="${card.cardNumber}" formaction="<c:url value="/admin/edit/activate"/>">Activate account</button>
-        <button type="submit" class="btn btn-primary" name="cardNumber" value="${card.cardNumber}" formaction="<c:url value="/admin/edit/change"/>">Change role</button>
+        <button type="submit" class="btn btn-primary" name="cardNumber" value="${card.cardNumber}" formaction="<c:url value="#"/>">Change role</button>
         <button type="button" class="btn btn-primary" onclick="history.back()">Back</button>
     </form>
 </div>
