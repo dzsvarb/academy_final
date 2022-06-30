@@ -18,7 +18,6 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class TransactionServiceImpl implements TransactionService {
 
-    public static final int ACCOUNT_NUMBER_RESERVE = 10;
     private final TransactionRepository transactionRepository;
     private final AccountRepository accountRepository;
     private final Validate validate;

@@ -17,9 +17,9 @@ public class Address {
     @Column
     private String street;
     @Column
-    private String house;
+    private Integer house;
     @Column
-    private String room;
+    private Integer room;
 
 }
 

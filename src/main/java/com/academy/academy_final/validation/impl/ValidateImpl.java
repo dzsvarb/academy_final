@@ -19,4 +19,9 @@ public class ValidateImpl implements Validate {
     public boolean resultBalanceIsGreaterNull(Account senderAccount, Float amount) {
         return (senderAccount.getAccountBalance() - amount) >= 0;
     }
+
+    @Override
+    public boolean isPasswordInvalid(String password, String passwordConf) {
+        return password.equals(passwordConf);
+    }
 }

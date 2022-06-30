@@ -71,7 +71,6 @@
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <form>
                 <button type="submit" class="btn btn-primary" name="cardNumber" value="${card.cardNumber}" formaction="<c:url value="/admin/activate"/>">Activate account</button>
-                <button type="submit" class="btn btn-primary" name="cardNumber" value="${card.cardNumber}" formaction="<c:url value="#"/>">Change role</button>
                 <button type="submit" class="btn btn-primary" formaction="<c:url value="/admin"/>">Back</button>
             </form>
                 </div>

@@ -44,14 +44,21 @@ public class MainConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+
                 .formLogin().permitAll()
                 .and()
-                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/css/**").permitAll()
-                .antMatchers( HttpMethod.GET,"/main/**").hasAnyRole("CUSTOMER")
-                .antMatchers( HttpMethod.GET,"/admin/**").hasAnyRole("ADMIN")
-                .anyRequest().authenticated();
+                .antMatchers("/").hasAnyRole("ADMIN","CUSTOMER")
+                .antMatchers(HttpMethod.GET,"/admin/**").hasRole("ADMIN")
+                .antMatchers( HttpMethod.GET,"/main/**").hasRole("CUSTOMER")
+                .anyRequest().authenticated()
+                .and()
+                .logout().permitAll()
+                .and()
+                .csrf().disable();
+
+
 
 
 

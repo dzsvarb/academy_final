@@ -73,10 +73,22 @@
                     </c:forEach>
                     </tbody>
 
-                   <%-- <button type="button" class="btn btn-primary position-relative">
-                        Mails <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99 <span class="visually-hidden">unread messages</span></span>
-                    </button>--%>
-    </table>
+                    </table>
+            </div>
+            <div class="p-2">
+                <div class="vstack gap-1">
+                    <div class="bg-light border">Actions</div>
+                </div>
+            </div>
+
+            <div class="p-2">
+                <div class="btn-group " role="group" aria-label="Basic example">
+                    <form>
+                        <div class="hstack gap-2" >
+                            <button type="submit" class="btn btn-primary"  formaction="<c:url value="/admin/addUser"/>">Add new user</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </body>

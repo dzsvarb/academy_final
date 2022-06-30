@@ -59,8 +59,6 @@ public class TransferController {
             return "transfer";
         }
 
-
-
         model.addAttribute("recipientCard", recipientCardNumber);
         model.addAttribute("cardNumber",senderCardNumber);
         model.addAttribute("amount",amount);

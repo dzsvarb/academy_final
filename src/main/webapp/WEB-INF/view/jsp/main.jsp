@@ -79,7 +79,7 @@
                 </div>
             </div>
 
-                <div class="p-2">
+            <div class="p-2">
                     <div class="btn-group " role="group" aria-label="Basic example">
                         <form>
                             <div class="hstack gap-2" >
