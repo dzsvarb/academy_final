@@ -1,5 +1,6 @@
 package com.academy.academy_final.service.impl;
 
+import com.academy.academy_final.validation.Validate;
 import com.academy.academy_final.model.entity.Account;
 import com.academy.academy_final.model.entity.Transaction;
 import com.academy.academy_final.model.repository.AccountRepository;
@@ -17,11 +18,14 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class TransactionServiceImpl implements TransactionService {
 
+    public static final int ACCOUNT_NUMBER_RESERVE = 10;
     private final TransactionRepository transactionRepository;
     private final AccountRepository accountRepository;
+    private final Validate validate;
 
     @Override
     public void transaction(String transactionType, Account senderAccountNumber, Account recipientAccountNumber, Float amount, LocalDateTime localTime) {
+
         Transaction transaction = new Transaction();
         transaction.setTransactionType(transactionType);
         transaction.setSenderAccount(senderAccountNumber);
@@ -40,17 +44,22 @@ public class TransactionServiceImpl implements TransactionService {
 
         var value = transaction.getTransactionValue();
 
-        if(senderAccount.getAccountStatus().getStatusName().equals("ACTIVE")&&recipientAccount.getAccountStatus()
-                .getStatusName().equals("ACTIVE")){
-            senderAccount.setAccountBalance(senderAccount.getAccountBalance()-value);
-            recipientAccount.setAccountBalance(recipientAccount.getAccountBalance()+value);
+        if(validate.isActive(senderAccount)&&validate.isActive(recipientAccount)){
+            if ( validate.resultBalanceIsGreaterNull(senderAccount,transaction.getTransactionValue())){
+                senderAccount.setAccountBalance(senderAccount.getAccountBalance()-value);
+                recipientAccount.setAccountBalance(recipientAccount.getAccountBalance()+value);
 
-            accountRepository.saveAndFlush(senderAccount);
-            accountRepository.saveAndFlush(recipientAccount);
+                accountRepository.saveAndFlush(senderAccount);
+                accountRepository.saveAndFlush(recipientAccount);
 
-            transactionRepository.saveAndFlush(transaction);}
+                transactionRepository.saveAndFlush(transaction);
+            }else {
+                throw new CannotCreateTransactionException("There are not enough funds on your account to complete the operation!");
+            }
+
+        }
         else {
-            throw new CannotCreateTransactionException("One of account BLOCKED!");//todo можно через трай кетч передать в модель и отображать на странице (новую выводить)
+            throw new CannotCreateTransactionException("Recipient account is BLOCKED or not exist!");
         }
 
 

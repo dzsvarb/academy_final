@@ -3,6 +3,8 @@ package com.academy.academy_final.model.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
@@ -14,6 +16,7 @@ public class Account {
     private Integer accountNumber;
 
     @Column
+
     private Float accountBalance;
 
     @OneToMany (mappedBy = "senderAccount")

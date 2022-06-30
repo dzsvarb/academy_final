@@ -3,6 +3,8 @@ package com.academy.academy_final.model.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
@@ -12,6 +14,7 @@ public class Organisation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Integer organisationId;
+
     @Column
     private String organisationName;
 
@@ -23,7 +26,7 @@ public class Organisation {
     @JoinColumn(name = "organisation_account", referencedColumnName = "account_number")
     private Account organisationAccount;
 
-     @OneToMany (mappedBy = "organisation")
+    @OneToMany (mappedBy = "organisation")
     private List<Service> services;
 
 }

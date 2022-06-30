@@ -41,7 +41,7 @@
                     <div class="hstack gap-3">
                         <form action="<c:url value="/main/blockedSuccess"/>"> <button type="submit" class="btn btn-outline-danger">Blocked</button>
                             <input type="hidden" name="cardNumber" value="${card.cardNumber}"></form>
-                        <button type="submit" class="btn btn-primary" name="back"  onclick="history.back()">Back</button>
+                        <form><button type="submit" class="btn btn-primary" formaction="<c:url value="/main"/>">Back</button></form>
                     </div>
             </div>
                 </div>

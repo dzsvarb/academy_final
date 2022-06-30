@@ -2,7 +2,6 @@ package com.academy.academy_final.controller;
 
 import com.academy.academy_final.service.AccountService;
 import com.academy.academy_final.service.CardService;
-import com.academy.academy_final.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,14 +45,5 @@ public class AdminController {
         }
         model.addAttribute("card", cardService.getCardByCardNumber(cardNumber));
             return "edit";
-    }
-
-    @GetMapping(value = "/edit/change")
-    public String adminEditChange(Model model, @RequestParam Integer cardNumber) {
-
-
-
-
-        return "editRolesuccess";
     }
 }

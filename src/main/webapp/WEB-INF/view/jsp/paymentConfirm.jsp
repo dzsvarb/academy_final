@@ -44,7 +44,7 @@
                     <input type="hidden" name="senderCardNumber" value="${cardNumber}">
                     <input type="hidden" name="serviceNumber" value="${service.serviceNumber}">
                 </form>
-                <button type="submit" class="btn btn-primary" name="back"  onclick="history.back()">Back</button>
+                <form><button type="submit" class="btn btn-primary" formaction="<c:url value="/main/paymentServiceList"/>">Back</button></form>
             </div>
         </div>
             </div>

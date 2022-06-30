@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="p-2">
-                <form action="<c:url value="/admin"/>"><button type="submit" class="btn btn-primary">Next</button></form>
+                <form><button type="submit" class="btn btn-primary" formaction="<c:url value="/admin"/>">Back</button></form>
             </div>
         </div>
     </body>

@@ -1,7 +1,9 @@
 package com.academy.academy_final.controller;
 
 import com.academy.academy_final.model.entity.User;
-import com.academy.academy_final.service.*;
+import com.academy.academy_final.service.CardService;
+import com.academy.academy_final.service.ServiceService;
+import com.academy.academy_final.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -10,8 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
-import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 
 @Controller
@@ -25,7 +26,6 @@ public class PaymentController {
 
     @GetMapping(value = "/paymentServiceList")
     String servicesList( Model model) {
-        var user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("allServices", serviceService.getAllService());
 
         return "paymentServiceList";
@@ -33,7 +33,7 @@ public class PaymentController {
 
     @GetMapping(value = "/paymentChooseCard")
     String paymentChooseCard(Model model, @RequestParam Integer serviceNumber) {
-        var user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();//todo verified balance +
+        var user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("cards", cardService.getCardsByUser(user));
         model.addAttribute("serviceNumber", serviceNumber);
 
@@ -50,16 +50,24 @@ public class PaymentController {
     }
 
     @GetMapping(value = "/paymentSuccess")
-    String paymentSuccess(Model model, @RequestParam Integer senderCardNumber, @RequestParam Integer serviceNumber) {
+    String paymentSuccess(Model model, @RequestParam  @Valid Integer senderCardNumber, @RequestParam @Valid Integer serviceNumber) {
         var senderAccount = cardService.getCardByCardNumber(senderCardNumber).getCardAccount();
         var service = serviceService.getServiceByServiceNumber(serviceNumber);
         var recipientAccount = service.getOrganisation().getOrganisationAccount();
         var amount = service.getServicePrice();
 
-        transactionService.transaction(PAYMENT, senderAccount, recipientAccount, amount, LocalDateTime.now());
+
+        try {transactionService.transaction(PAYMENT, senderAccount, recipientAccount, amount, LocalDateTime.now());
+        } catch (Exception e){
+            TransferController.errorOut(model,e.getMessage());
+            model.addAttribute("allServices", serviceService.getAllService());
+            return "paymentServiceList";
+        }
 
         model.addAttribute("serviceDescription", service.getServiceDescription());
 
         return "paymentSuccess";
     }
+
+
 }

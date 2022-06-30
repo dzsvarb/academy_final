@@ -31,7 +31,10 @@
             <div class="p-2">
                 <div class="vstack gap-1">
                     <div class="bg-light border">Transfer</div>
-                    <div class="bg-light border">${principal.username}, select recipient card and amount</div>
+                    <div class="bg-light border">${principal.username}, input recipient card number and amount</div>
+                    <c:if test="${error!=null}">
+                    <div class="bg-danger p-2" style="--bs-bg-opacity: .5;">${error}</div>
+                    </c:if>
                 </div>
             </div>
             <div class="p-2">
@@ -89,7 +92,7 @@
                 </div>
             </div>
             <div class="p-2">
-                <button type="button" class="btn btn-primary" name="back" onclick="history.back()">Back</button>
+                <form><button type="submit" class="btn btn-primary" formaction="<c:url value="/main/transferChooseCard"/>">Back</button></form>
             </div>
         </div>
 

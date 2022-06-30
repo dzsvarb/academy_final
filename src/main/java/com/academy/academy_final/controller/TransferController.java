@@ -8,9 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
@@ -32,7 +30,7 @@ public class TransferController {
     }
 
     @GetMapping(value = "/transfer")
-    public String transfer(@RequestParam Integer cardNumber, Model model ) {
+    public String transfer(@RequestParam  Integer cardNumber, Model model ) {
         Card card = cardService.getCardByCardNumber(cardNumber);
         model.addAttribute("card", card);
         return "transfer";
@@ -40,17 +38,27 @@ public class TransferController {
 
 
     @GetMapping(value = "/transferSuccess")
-    public String transferSuccess(@RequestParam Integer amount, @RequestParam Integer recipientCardNumber,@RequestParam Integer senderCardNumber, Model model) {
-        if(senderCardNumber.equals(recipientCardNumber)||amount<0|| recipientCardNumber == null){
+    public String transferSuccess(@RequestParam Integer amount, @RequestParam  Integer recipientCardNumber,
+                                  @RequestParam  Integer senderCardNumber, Model model) {
+        if(amount<=0||recipientCardNumber==null||senderCardNumber==null||senderCardNumber.equals(recipientCardNumber)){
             var card = cardService.getCardByCardNumber(senderCardNumber);
             model.addAttribute("card", card);
+            errorOut(model,"One of parameter is invalid!");
             return "transfer";
         }
 
         var senderAccount = cardService.getCardByCardNumber(senderCardNumber).getCardAccount();
         var recipientAccount = cardService.getCardByCardNumber(recipientCardNumber).getCardAccount();
 
-        transactionService.transaction(TRANSFER,senderAccount,recipientAccount,amount.floatValue(),LocalDateTime.now());
+        try {
+            transactionService.transaction(TRANSFER,senderAccount,recipientAccount,amount.floatValue(),LocalDateTime.now());
+        }catch (Exception e){
+            errorOut(model, e.getMessage());
+            var card = cardService.getCardByCardNumber(senderCardNumber);
+            model.addAttribute("card", card);
+            return "transfer";
+        }
+
 
 
         model.addAttribute("recipientCard", recipientCardNumber);
@@ -59,6 +67,10 @@ public class TransferController {
 
 
         return "transferSuccess";
+    }
+
+    public static void errorOut(Model model, String message) {
+        model.addAttribute("error",message);
     }
 
 

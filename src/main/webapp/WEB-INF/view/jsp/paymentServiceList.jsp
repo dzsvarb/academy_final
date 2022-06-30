@@ -32,6 +32,9 @@
                 <div class="vstack gap-1">
             <div class="bg-light border">Services</div>
             <div class="bg-light border">${principal.username} , choose a Service for payment</div>
+                    <c:if test="${error!=null}">
+                        <div class="bg-danger p-2" style="--bs-bg-opacity: .5;">${error}</div>
+                    </c:if>
         </div>
             </div>
             <div class="p-2">
@@ -63,7 +66,7 @@
         </table>
             </div>
             <div class="p-2">
-                <button type="button" class="btn btn-primary"  name="back" onclick="history.back()">Back</button>
+                <form><button type="submit" class="btn btn-primary" formaction="<c:url value="/main"/>">Back</button></form>
             </div>
         </div>
     </body>
